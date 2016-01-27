@@ -88,7 +88,15 @@ To get up and running, simply do the following:
     # Perform database migrations
     $ python manage.py makemigrations
     $ python manage.py migrate
-
+    
+    # Get API keys
+      process to do that is described below.
+   
+    # Run server
+    $ python manage.py runserver 8000
+    
+    
+Now go to this [link](http://127.0.0.1:8000/hackathon)
 
 **NOTE**: We highly recommend creating a [Virtual Environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/). Python Virtual Environments allow developers to work in isolated sandboxes and to create separation between python packages installed via [pip](https://pypi.python.org/pypi/pip).
 
