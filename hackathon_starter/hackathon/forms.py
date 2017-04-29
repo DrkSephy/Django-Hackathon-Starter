@@ -6,6 +6,6 @@ from hackathon.models import UserProfile
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
-    class Meta:
+    class Meta(object):
         model = User
         fields = ('username', 'email', 'password')
