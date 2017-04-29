@@ -10,7 +10,7 @@ ACCESS_TOKEN_URL = 'https://accounts.google.com/o/oauth2/token'
 REDIRECT_URL = 'http://localhost:8000/hackathon/'
 PROFILE_API = 'https://www.googleapis.com/auth/plus.login'
 
-class GooglePlus:
+class GooglePlus(object):
 
 	access_token = None
 	session_id = None

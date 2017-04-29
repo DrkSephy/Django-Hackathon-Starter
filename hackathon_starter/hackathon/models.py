@@ -67,7 +67,7 @@ class Snippet(models.Model):
     code = models.TextField()
     linenos = models.BooleanField(default=False)
 
-    class Meta:
+    class Meta(object):
         ordering = ('created',)
 
 class MeetupToken(models.Model):

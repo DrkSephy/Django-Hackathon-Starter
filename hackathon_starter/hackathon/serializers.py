@@ -4,6 +4,6 @@ from hackathon.models import Snippet
 
 
 class SnippetSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta(object):
         model = Snippet
         fields = ('id', 'title', 'code', 'linenos')
