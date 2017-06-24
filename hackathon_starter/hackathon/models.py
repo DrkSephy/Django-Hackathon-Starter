@@ -27,6 +27,15 @@ class GithubProfile(models.Model):
     def __unicode__(self):
         return unicode(self.user)
 
+class TumblrProfile(models.Model):
+    user = models.ForeignKey(User)
+    tumblr_user = models.CharField(max_length=200)
+    access_token = models.CharField(max_length=200)
+    access_token_secret = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return unicode(self.user)
+
 class InstagramProfile(models.Model):
     user = models.ForeignKey(User)
     instagram_user = models.CharField(max_length=200)
@@ -67,3 +76,30 @@ class MeetupToken(models.Model):
 
     def __unicode__(self):
         return unicode(self.access_token)
+
+class FacebookProfile(models.Model):
+    user = models.ForeignKey(User)
+    fb_user_id = models.CharField(max_length=100)
+    time_created = models.DateTimeField(auto_now_add=True)
+    profile_url = models.CharField(max_length=50)
+    access_token = models.CharField(max_length=100)
+
+class GoogleProfile(models.Model):
+    user = models.ForeignKey(User)
+    google_user_id = models.CharField(max_length=100)
+    time_created = models.DateTimeField(auto_now_add=True)
+    access_token = models.CharField(max_length=100)
+    profile_url = models.CharField(max_length=100)
+
+class DropboxProfile(models.Model):
+    user = models.ForeignKey(User)
+    dropbox_user_id = models.CharField(max_length=100)
+    time_created = models.DateTimeField(auto_now_add=True)
+    access_token = models.CharField(max_length=100)
+
+
+class FoursquareProfile(models.Model):
+    user = models.ForeignKey(User)
+    foursquare_id = models.CharField(max_length=100)
+    time_created = models.DateTimeField(auto_now_add=True)
+    access_token = models.CharField(max_length=100)

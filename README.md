@@ -9,15 +9,11 @@ Even if you are not using this for a hackathon, Django Hackathon Starter is sure
 
 <h4 align="center">Basic Authentication / OAuth Signin </h4>
 
-![Login](https://github.com/DrkSephy/drksephy.github.io/blob/master/img/login.png)
+![Login](http://i.imgur.com/sEIHsIS.png)
 
 <h4 align="center">API Examples </h4>
 
-![API Examples](https://github.com/DrkSephy/drksephy.github.io/blob/master/img/api_examples.png)
-
-<h4 align="center">Twitter Example </h4>
-
-![Twitter Tweets](http://i.imgur.com/tHZrgoK.png)
+![API Examples](http://i.imgur.com/zFqKcVa.png)
 
 Table of Contents
 -----------------
@@ -34,10 +30,20 @@ Features
 --------
 * User Registration
 * Sphinx Documentation
-* Django Nosetests 
+* Django Nosetests
+* Integration with Django Rest Framework
 * Basic Authentication with username and password
-* **OAuth 2.0 Authentication** for Github, LinkedIn and Instagram
-* **OAuth 1.0a Authentication** for Twitter and Tumblr
+* **OAuth 2.0 Authentication**
+    * Github
+    * LinkedIn
+    * Instagram
+    * Facebook
+    * Google+
+    * Dropbox
+    * Foursquare
+* **OAuth 1.0a Authentication** 
+    * Twitter
+    * Tumblr
 * **API Examples**
     * Yelp API
     * Github API
@@ -45,11 +51,15 @@ Features
     * Tumblr API
     * Twitter API
     * Twilio API
-    * Meetup API 
+    * Meetup API
     * Steam API
     * Quandl Stock API
     * New York Times API
     * LinkedIn API
+    * Facebook API
+    * Google+ API
+    * Dropbox API
+    * Foursquare API
 
 <hr>
 
@@ -67,14 +77,14 @@ To get up and running, simply do the following:
 
     $ git clone https://github.com/DrkSephy/django-hackathon-starter.git
     $ cd django-hackathon-starter
-    
+
     # Install the requirements
     $ pip install -r requirements.txt
-    
+
     # Install bower
     $ npm install -g bower
     $ bower install
-    
+
     # Perform database migrations
     $ python manage.py makemigrations
     $ python manage.py migrate
@@ -82,11 +92,8 @@ To get up and running, simply do the following:
 
 **NOTE**: We highly recommend creating a [Virtual Environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/). Python Virtual Environments allow developers to work in isolated sandboxes and to create separation between python packages installed via [pip](https://pypi.python.org/pypi/pip).
 
-**NOTE**: To get you up and running quickly, we have provided dummy API keys for use. We highly recommend setting up your own keys and replacing them within `settings.py`. 
-
-
 <hr>
-    
+
 Getting API Keys
 ----------------
 
@@ -111,7 +118,7 @@ Getting API Keys
     * For `redirect url` field, enter: `http://127.0.0.1:8000/hackathon/`
 3. Within `settings.py`, add the following:
     * `MEETUP_CONSUMER_KEY` = `Meetup key`
-    * `MEETUP_CONSUMER_SECRET` = `Meetup secret key` 
+    * `MEETUP_CONSUMER_SECRET` = `Meetup secret key`
 
 <hr>
 
@@ -119,7 +126,7 @@ Getting API Keys
 
 1. Register an account on [Twilio.com](https://www.twilio.com/)
 2. Get your [Twilio Number](https://www.twilio.com/user/account/phone-numbers/incoming)
-3. [Setup the numbers](https://www.twilio.com/user/account/phone-numbers/incoming) you want to be able to send messages to 
+3. [Setup the numbers](https://www.twilio.com/user/account/phone-numbers/incoming) you want to be able to send messages to
 4. Grab your `account_sid` and `auth_token` [here](https://www.twilio.com/user/account/voice-messaging)
 5. Within `scripts/twilioapi.py`:
     * Replace `account_sid` with your own Twilio `account_sid`
@@ -172,7 +179,6 @@ Getting API Keys
     * `INSTAGRAM_CLIENT_ID` = `Instagram-client-id`
     * `INSTAGRAM_CLIENT_SECRET` = `Instagram-client-secret`
 
-
 <hr>
 
 <img src="http://blogs.kenan-flagler.unc.edu/wp-content/uploads/2013/10/LinkedIn-Logo-2C.png" width="200">
@@ -193,16 +199,98 @@ Getting API Keys
 <img src="http://www.freelargeimages.com/wp-content/uploads/2014/11/Facebook_logo-6.jpg" width="200">
 
 1. Register an account on [Facebook.com](http://www.facebook.com.com/)
-2. Visit [Facebook Developer Network page](https://developers.facebook.com/)
-3. After logging in, Click on **My Apps** and then on **Add a New App+**
-    * Choose Website as the platform and add the **name** for your project
-    * Click on **Create New Facebook APP ID** and choose the **Category** of your application
+2. Visit [Facebook Developers page](https://developers.facebook.com/)
+3. After logging in, Click on **My Apps** and then on **Add a New App**
+    * Choose W**ebsite** as the platform and add the **name** for your project
+    * Give your app a name.
+    * Choose the category your app falls into.
     * Click **Create App ID**
-4. After the captcha, scroll down past the quick start and add `http://localhost:8000/`
-5. Within your `views.py` add the **App ID** in `yourappid` underneath the view for your facebook application.
+    * Skip the quickstart process and you will be redirected to the app dashboard.
+4. Copy the **app ID** and the **app secret**.
+5. From the left menu choose the **Settings** option.
+6. Click on **Add Platform** and choose **Website** once again.
+7. Under **site URL**, specift the URL to be redirected after authentication is complete.
+8. Click save.
+9. In ```settings.py``` change the following values:
+    * ```FACEBOOK_APP_ID = your_app_id```
+    * ```FACEBOOK_APP_SECRET = your_app_secret```
 
 
 <hr>
+
+<img src="http://icons.iconarchive.com/icons/marcus-roberto/google-play/512/Google-plus-icon.png" width="200" />
+
+1. Register an account on [Google.com](https://accounts.google.com/signup).
+2. Navigate to [Google Developer Console](https://console.developers.google.com/project).
+3. Click on **Create Project**, give your app a name and click **Create** (this might take a few sceonds).
+4. You will be redirected to the project dashboard. From the left menu choose **APIs & auth** and then choose **APIs**.
+5. Choose the API you would like to use (the built in example uses **Google+ API**).
+6. Click on **Enable API**.
+7. From the side menu, under **APIs & auth** select **consent screen**.
+    * Fill your app name under **Product Name**.
+    * Hit **save** button on the bottom.
+8. From the side menu, under **APIs & auth** select credentials:
+    * Click on **Create new Client ID**.
+    * Under **Authorized JavaScript origins** specify you app base address (e.g ```http://localhost:8000```).
+    * Under **Authorized redirect URIs** specify the URL to be redirected after authentication is complete.
+    * Hit **Create Client ID** button (this might also take a few seconds).
+9. Copy your new generated ```client_id``` and ```client_secret```:
+10. Under ```settings.py``` change the following values:
+    * ```GOOGLE_PLUS_APP_ID = your_client_id```
+    * ```GOOGLE_PLUS_APP_SECRET = your_client_secret```
+
+<hr>
+
+<img src="https://cf.dropboxstatic.com/static/images/brand/logotype-vflFbF9pY.png" width="200">
+
+1. Register an account on [Dropbox.com](http://www.dropbox.com).
+2. Navigate to [Dropbox Developers](https://www.dropbox.com/developers).
+3. From the side menu, select **App Console** and click on **Create app**.
+4. Configure the app permissions. This example uses the following configuration:
+    * App type- Dropbox API app
+    * My app needs access to files already on Dropbox.
+    * My app needs access to a user's full Dropbox.
+    * **Note:** This kind of configuration will require you to submit your app for approval.
+5. Give your app a name and click the **Create app button**.
+6. You will be redirected to the app console:
+    * Under **Redirect URIs** specify the URL to be redirected after authentication is complete (e.g ```http://locahost:8000/home```) and click **add**.
+    * Copy your ```App key``` and ```App secret```.
+7. Under ```settings.py``` change the following values:
+    * ```DROPBOX_APP_ID = your_app_id```
+    * ```DROPBOX_APP_SECRET = your_app_secret```
+<hr>
+
+<img src='http://www.atlantamusicguide.com/wp-content/uploads/foursquare-logo.png' width="200">
+
+1. Register and account on [Foursquare.com](https://foursquare.com).
+2. Navigate to [Foursquare For Developers](https://developer.foursquare.com).
+3. From the top menu bar select **My Apps** and you will be redirected to the app dashboard.
+4. Hit **Create a New App**:
+    * Give your app a name.
+    * Under **Download / welcome page url**, specify your app main url (e.g ```http://www.localhost:8000```).
+    * Under **Redirect URI**, specify the URL to be redirected after authentication is complete (e.g ```http://locahost:8000/home```) and click **add**.
+    * Scroll all the way to the botttom and hit **Save Changes**.
+5. From the App page you were redirected to, copy your ```App key``` and ```App secret```.
+6. Under ```settings.py``` change to following values:
+    * ```FOURSQUARE_APP_ID = your_client_id```
+    * ```FOURSQUARE_APP_SECRET = your_app_secret```
+<hr>
+
+
+<img src="https://secure.assets.tumblr.com/images/logo_page/img_logotype_34465d_2x.png" width="200">
+
+1. Register an account on Tumblr.com.
+2. Visit Tumblr applications page.
+3. Click on Register Application.
+    * Enter your application information.
+    * For Default callback URL field, enter: http://127.0.0.1:8000/hackathon/.
+4. Click Register.
+5. Within settings.py, add the following:
+    * TUMBLR_CONSUMER_KEY = `Tumblr-consumer-key`
+    * TUMBLR_CONSUMER_SECRET = `Tumblr-consumer-secret`
+
+<hr>
+
 
 <img src="http://games.overpress.it/wp-content/uploads/sites/7/2014/10/steam-logo-10.jpg" width="200">
 
@@ -227,11 +315,11 @@ Getting API Keys
 
 <hr>
 
-<img src="http://planetcassandra.org/blogs/Upload/Postddfdbb6f-16ed-4e1c-8e29-ff2cf0cb43a1/quandl.png" width="200">
+<img src="http://qph.is.quoracdn.net/main-qimg-45312af6930eb01c3c68db9bb30bcad8?convert_to_webp=true" width="200">
 
 1. Register an account on [Quandl](https://www.quandl.com/)
-2. After logging in, click on **Me** and then **Account settings** to find the API key 
-3. Within your `settings.py`add `QUANDLAPIKEY` = `Key` 
+2. After logging in, click on **Me** and then **Account settings** to find the API key
+3. Within your `settings.py`add `QUANDLAPIKEY` = `Key`
 
 <hr>
 
@@ -241,37 +329,40 @@ Project Structure
 
 | Name                               | Description                                                 |
 | ---------------------------------- |:-----------------------------------------------------------:|
-| **hackathon_starter/hackathon_starter**/settings.py | Django settings module containing database and API keys/tokens.|
-| **hackathon_starter/hackathon**/admin.py            | Registered models for Django's admin page.|
-| **hackathon_starter/hackathon**/models.py           | Django models and profiles for user login.|
-| **hackathon_starter/hackathon**/tests.py            | Integration tests.|
-| **hackathon_starter/hackathon**/urls.py             | Django Hackathon Starter URL dispatcher.|
-| **hackathon_starter/hackathon**/views.py            | Django views file.|
-| **hackathon_starter/hackathon**/serializers.py      | Allows JSON representation for Django Model fields.|
-| **hackathon_starter/hackathon**/forms.py            | Basic form fields.|
-| **hackathon_starter/hackathon/static/**             | Front-end JavaScript / CSS files.|
-| **hackathon_starter/hackathon/unittests**           | Unit tests.|
-| **hackathon_starter/hackathon/scripts/**            | API Example scripts.|
-| **hackathon_starter/hackathon/scripts/**github.py   | Script for interacting with Github API.   |
-| **hackathon_starter/hackathon/scripts/**instagram.py| Script for interacting with Instagram API.|
-| **hackathon_starter/hackathon/scripts/**linkedin.py | Script for interacting with LinkedIn API. |
-| **hackathon_starter/hackathon/scripts/**meetup.py   | Script for interacting with Meetup API. |
-| **hackathon_starter/hackathon/scripts/**nytimes.py  | Script for interacting with New York Times API. |
-| **hackathon_starter/hackathon/scripts/**quandl.py   | Script for interacting with Quandl API. |
-| **hackathon_starter/hackathon/scripts/**scraper.py  | Basic web scraper for getting sales from Steam.            |
-| **hackathon_starter/hackathon/scripts/**steam.py                      | Script for interacting with Steam API.   |
-| **hackathon_starter/hackathon/scripts/**tumblr.py                     | Script for interacting with Tumblr API.  |
-| **hackathon_starter/hackathon/scripts/**twilioapi.py                  | Script for interacting with Twilio API.  |
-| **hackathon_starter/hackathon/scripts/**twitter.py                    | Script for interacting with Twitter API. |
-| **hackathon_starter/hackathon/scripts/**yelp.py                       | Script for interacting with Yelp API. |
-| **hackathon_starter/hackathon/templates/**hackathon/                  | Templates for API examples. |
-| **hackathon_starter/hackathon/templates/**hackathon/base.html         | Base template, contains navbar. |
-| **hackathon_starter/hackathon/templates/**hackathon/api_examples.html | Template for API Examples page. |
+| **hackathon_starter**/settings.py | Django settings module containing database and API keys/tokens|
+| **hackathon**/admin.py            | Registered models for Django's admin page|
+| **hackathon**/models.py           | Django models and profiles for user login|
+| **hackathon**/tests.py            | Integration tests|
+| **hackathon**/urls.py             | Django Hackathon Starter URL dispatcher|
+| **hackathon**/views.py            | Django views file|
+| **hackathon**/serializers.py      | Allows JSON representation for Django Model fields|
+| **hackathon**/forms.py            | Basic form fields|
+| **hackathon/static/**             | Front-end JavaScript / CSS files|
+| **hackathon/unittests**           | Unit tests|
+| **hackathon/scripts/**            | API Example scripts|
+| **hackathon/scripts/**github.py   | Script for interacting with Github API   |
+| **hackathon/scripts/**instagram.py| Script for interacting with Instagram API|
+| **hackathon/scripts/**linkedin.py | Script for interacting with LinkedIn API |
+| **hackathon/scripts/**meetup.py   | Script for interacting with Meetup API |
+| **hackathon/scripts/**nytimes.py  | Script for interacting with New York Times API |
+| **hackathon/scripts/**quandl.py   | Script for interacting with Quandl API |
+| **hackathon/scripts/**scraper.py  | Basic web scraper for getting sales from Steam            |
+| **hackathon/scripts/**facebook.py | Script for interacting with Facebook API |
+| **hackathon/scripts/**dropbox.py  | Script for interacting with Dropbox API |
+| **hackathon/scripts/**foursquare.py | Script for interacting with Foursquare API |
+| **hackathon/scripts/**googlePlus.py | Script for interacting with Google+ API |
+| **hackathon/scripts/**steam.py                      | Script for interacting with Steam API   |
+| **hackathon/scripts/**tumblr.py                     | Script for interacting with Tumblr API  |
+| **hackathon/scripts/**twilioapi.py                  | Script for interacting with Twilio API  |
+| **hackathon/scripts/**twitter.py                    | Script for interacting with Twitter API |
+| **hackathon/scripts/**yelp.py                       | Script for interacting with Yelp API |
+| **hackathon/templates/**hackathon/                  | Templates for API examples |
+| **hackathon/templates/**hackathon/base.html         | Base template, contains navbar |
 
 Contributing
 ------------
 
-We welcome contributions of all kinds. If you would like to know what work is needed to be done, check the [issue tracker](https://github.com/DrkSephy/django-hackathon-starter/issues). Before sending a pull request, please open an issue. This project follows the [pep-0008](https://www.python.org/dev/peps/pep-0008/) style guide. 
+We welcome contributions of all kinds. If you would like to know what work is needed to be done, check the [issue tracker](https://github.com/DrkSephy/django-hackathon-starter/issues). Before sending a pull request, please open an issue. This project follows the [pep-0008](https://www.python.org/dev/peps/pep-0008/) style guide.
 
 
 LICENSE
@@ -298,5 +389,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-

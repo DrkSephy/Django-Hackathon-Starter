@@ -1,9 +1,13 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
+from rest_framework.routers import DefaultRouter
 
 from hackathon import views
 
+router = DefaultRouter()
+router.register(r'snippets', views.SnippetView)
+
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),
+    url(r'^', include(router.urls)),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^logout/$', views.user_logout, name='logout'),
@@ -15,7 +19,6 @@ urlpatterns = patterns('',
     url(r'^githubTopRepositories/$', views.githubTopRepositories, name='githubTopRepositories'),
     url(r'^tumblr/$', views.tumblr, name='tumblr'),
     url(r'^linkedin/$', views.linkedin, name='linkedin'),
-    url(r'^snippets/$', views.snippet_list, name='snippets'),
     url(r'^twilio/$', views.twilio, name='twilio'),
     url(r'^instagram/$', views.instagram, name='instagram'),
     url(r'^instagram_login/$', views.instagram_login, name='instagram_login'),
@@ -28,7 +31,15 @@ urlpatterns = patterns('',
     url(r'^twitter_login/$', views.twitter_login, name='twitter_login'),
     url(r'^github_login/$', views.github_login, name='github_login'),
     url(r'^linkedin_login/$', views.linkedin_login, name='linkedin_login'),
+    url(r'^facebook_login/$', views.facebook_login, name='facebook_login'),
     url(r'^facebook/$', views.facebook, name='facebook'),
+    url(r'^google_login/$', views.google_login, name='google_login'),
+    url(r'^google/$', views.googlePlus, name='googlePlus'),
+    url(r'^dropbox_login/$', views.dropbox_login, name='dropbox_login'),
+    url(r'^dropbox/$', views.dropbox, name='dropbox'),
+    url(r'^dropboxSearchFile/$', views.dropboxSearchFile, name='dropboxSearchFile'),
+    url(r'^foursquare_login/$', views.foursquare_login, name='foursquare_login'),
+    url(r'^foursquare/$', views.foursquare, name='foursquare'),
     url(r'^quandlSnp500/$', views.quandlSnp500, name='quandlsnp500'),
     url(r'^quandlNasdaq/$', views.quandlNasdaq, name='quandlnasdaq'),
     url(r'^quandlNasdaqdiff/$', views.quandlNasdaqdiff, name='quandlnasdaqdiff'),
