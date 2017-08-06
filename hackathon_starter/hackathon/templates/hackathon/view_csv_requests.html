@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        .photo-request{
+            width:75%;
+            margin:auto;
+            text-align:left;
+        }
+    </style>
+</head>
+<body>
+{% include 'hackathon/base.html' %}
+
+{% load static %}
+
+{% block content %}
+{% for r in requests %}
+<div class="photo-request">
+{% for key, value in r.items %}
+<p><b>{{key}}: </b>{{ value }}</p>
+{% endfor %}
+    </div>
+<hr>
+{% endfor %}
+{% endblock %}
+</body>
+</html>
