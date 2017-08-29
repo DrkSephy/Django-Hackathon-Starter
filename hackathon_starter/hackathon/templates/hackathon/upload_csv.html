@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload CSV</title>
+    <style>
+        form {
+            width: 50%;
+            margin: auto;
+        }
+        form>label{
+            padding:5px
+        }
+        #id_file{
+            padding-bottom: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: center;
+        }
+        #upload_button{
+            padding-top: 10px;
+            margin:auto;
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+{% include 'hackathon/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" action="{% url 'csv_reader' %}">
+    {% csrf_token %}
+    {{ form }}
+    <div id="upload_button">
+        <input style="width: 100%" type="submit" value="Upload">
+    </div>
+</form>
+{% endblock %}
+</body>
+</html>
