@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>View CSV</title>
     <style>
-
-        .photo-request{
-            width:75%;
-            margin:auto;
-            text-align:left;
+        .photo-request {
+            width: 50%;
+            margin: auto;
+            text-align: left;
         }
     </style>
 </head>
@@ -20,10 +19,15 @@
 {% block content %}
 {% for r in requests %}
 <div class="photo-request">
-{% for key, value in r.items %}
-<p><b>{{key}}: </b>{{ value }}</p>
-{% endfor %}
-    </div>
+    <ul style="list-style-type: none">
+        <li class="photo-request"><b>Name: </b>{{r.first_name}} {{r.last_name}}</li>
+        <li class="photo-request"><b>Department: </b>{{r.department}}</li>
+        <li class="photo-request"><b>Event name: </b>{{r.event}}</li>
+        <li class="photo-request"><b>Description: </b>{{r.description}}</li>
+        <li class="photo-request"><b>Start Date/Time: </b>{{r.start_date_time}}</li>
+        <li class="photo-request"><b>End Date/Time: </b>{{r.end_date_time}}</li>
+    </ul>
+</div>
 <hr>
 {% endfor %}
 {% endblock %}

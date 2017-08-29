@@ -11,12 +11,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .forms import UploadFileForm
+from .forms import UploadFileForm, PhotoRequestForm
 # Django REST Framework
 from rest_framework import viewsets, mixins
 import csv
 import os
-
+from .models import PhotoRequest
 # Scripts
 from scripts.steam import gamespulling, steamidpulling
 from scripts.github import *
@@ -42,8 +42,8 @@ import requests
 
 # Models
 from hackathon.models import *
-from hackathon.serializers import SnippetSerializer
-from hackathon.forms import UserForm
+from .serializers import SnippetSerializer
+from .forms import UserForm
 
 profile_track = None
 getTumblr = TumblrOauthClient(settings.TUMBLR_CONSUMER_KEY, settings.TUMBLR_CONSUMER_SECRET)
@@ -1749,7 +1749,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/hackathon/api/')
+                return render(request, 'hackathon/index.html')
             else:
                 return HttpResponse("Your Django Hackathon account is disabled.")
         else:
@@ -1832,9 +1832,7 @@ def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            return render(request, 'hackathon/upload_csv.html', {
-                'uploaded_file_url': uploaded_file_url
-            })
+            return render(request, 'hackathon/upload_csv.html')
     else:
         form = UploadFileForm()
     return render(request, 'hackathon/upload_csv.html', {'form': form})
@@ -1842,13 +1840,36 @@ def upload_file(request):
 
 def csv_reader(request):
     if request.method == 'POST':
-        paramFile = request.FILES['file'].read().split('\n')
+        try:
+            paramFile = request.FILES['file'].read().split('\n')
+        except:
+            form = UploadFileForm()
+            return render(request, 'hackathon/upload_csv.html', {'form': form})
         photorequest = csv.DictReader(paramFile)
-        fieldnames = next(photorequest)
-        photorequest = csv.DictReader(paramFile, fieldnames=fieldnames)
-        next(photorequest)
+        photorequest = csv.DictReader(paramFile)
+        print "-------------------------------------------"
         a = []
         for row in photorequest:
+            photoRequest = PhotoRequest()
+            print row
+            photoRequest.insert(row)
+            test = photoRequest.start_date_time
+            test2 = photoRequest.end_date_time
+            photoRequest.save()
             a.append(row)
         return render(request, 'hackathon/view_csv_requests.html', {'requests': a})
-    return render(request, 'hackathon/upload_csv.html')
+    form = UploadFileForm()
+    return render(request, 'hackathon/upload_csv.html', {'form': form})
+
+def create_photo_request(request):
+    if request.method == 'POST':
+        form = PhotoRequestForm(request.POST)
+        if form.is_valid():
+            try:
+                photoRequest = PhotoRequest.objects.get(first_name=request.POST.get('first_name'), last_name=request.POST.get('last_name'), department=request.POST.get('department'), event=request.POST.get('event'), description=request.POST.get('description'), start_date_time=request.POST.get('start_date_time'), end_date_time=request.POST.get('end_date_time'))
+            except Exception:
+                form.save()
+                photoRequest = PhotoRequest.objects.get(first_name=request.POST.get('first_name'), last_name=request.POST.get('last_name'), department=request.POST.get('department'), event=request.POST.get('event'), description=request.POST.get('description'), start_date_time=request.POST.get('start_date_time'), end_date_time=request.POST.get('end_date_time'))
+                return render(request, 'hackathon/createPhotoRequestSuccess.html', {'form': form, 'photoRequest': photoRequest})
+    form = PhotoRequestForm()
+    return render(request, 'hackathon/createPhotoRequest.html', {'form': form})

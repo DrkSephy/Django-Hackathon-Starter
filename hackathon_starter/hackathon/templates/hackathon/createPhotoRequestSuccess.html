@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Photo Request</title>
+    <style>
+        .photo-request {
+            width: 50%;
+            margin: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+{% include 'hackathon/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <ul style="list-style-type: none; width:75%; margin: auto;">
+        <li class="photo-request"><b>Name: </b>{{photoRequest.first_name}} {{photoRequest.last_name}}</li>
+        <li class="photo-request"><b>Department: </b>{{photoRequest.department}}</li>
+        <li class="photo-request"><b>Event name: </b>{{photoRequest.event}}</li>
+        <li class="photo-request"><b>Description: </b>{{photoRequest.description}}</li>
+        <li class="photo-request"><b>Start Date/Time: </b>{{photoRequest.start_date_time}}</li>
+        <li class="photo-request"><b>End Date/Time: </b>{{photoRequest.end_date_time}}</li>
+    </ul>
+</div>
+{% endblock %}
+</body>
+</html>
