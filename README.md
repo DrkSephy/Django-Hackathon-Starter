@@ -81,9 +81,9 @@ To get up and running, simply do the following:
     # Install the requirements
     $ pip install -r requirements.txt
 
-    # Install bower
-    $ npm install -g bower
-    $ bower install
+    # Install npm deps
+    $ npm install 
+    
 
     # Perform database migrations
     $ python manage.py makemigrations
