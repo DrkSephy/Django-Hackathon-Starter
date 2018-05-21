@@ -13,7 +13,7 @@ import simplejson as json
 import time
 import re
 from bs4 import BeautifulSoup
-import urlparse
+import urllib.parse as urlparse
 import oauth2
 
 request_token_url = 'http://www.tumblr.com/oauth/request_token'
@@ -63,7 +63,7 @@ class TumblrOauthClient(object):
         self.is_authorized = True
         token = oauth2.Token(self.oauth_token, self.oauth_token_secret)
         self.oauth_verifier = oauth_verifier
-        print self.oauth_verifier
+        print (self.oauth_verifier)
         token.set_verifier(self.oauth_verifier)
         client = oauth2.Client(self.consumer, token)
         resp, content = client.request(access_token_url, "POST")
@@ -139,14 +139,14 @@ class TumblrOauthClient(object):
                 if data == "body":
                     if blog[data]:
                         #print blog[data]
-                        soup = BeautifulSoup(blog[data])
+                        soup = BeautifulSoup(blog[data], "html.parser")
                         text = soup.get_text()
                         tagtext.append(text)
                 #an image
                 if data == "caption":
                     if blog[data]:
                         #print blog[data]
-                        soup = BeautifulSoup(blog[data])
+                        soup = BeautifulSoup(blog[data], "html.parser")
                         text = soup.get_text()
                         tagtext.append(text)
 

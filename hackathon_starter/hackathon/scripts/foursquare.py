@@ -70,10 +70,9 @@ class FoursquareOauthClient(object):
         response = requests.get(ACCESS_TOKEN_URL + '?' + params)
 
         if response.status_code != 200:
-			raise(Exception('Invalid response,response code: {c}'.format(c=response.status_code)))
+            raise (Exception('Invalid response,response code: {c}'.format(c='fix my error code')))
 
         self.access_token = response.json()['access_token']
-
 
     def get_user_info(self, api_version='20140806'):
         '''
@@ -97,6 +96,6 @@ class FoursquareOauthClient(object):
         response = requests.get(USER_INFO_API_URL + '?' + params)
 
         if response.status_code != 200:
-			raise(Exception('Invalid response,response code: {c}'.format(c=response.status_code)))
+            raise (Exception('Invalid response,response code: {c}'.format(c=response.status_code)))
 
         return response.json()['response']['user']

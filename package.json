@@ -1,0 +1,68 @@
+{
+  "name": "django2_hackathon_starter",
+  "displayName": "Django2 Hackathon Starter",
+  "version": "1.0.0",
+  "description": "Framework for Hackathons",
+  "scripts": {
+    "test": "karma start",
+    "test-watch": "karma start --auto-watch --no-single-run",
+    "single-test": "karma run -- --grep",
+    "install-all": "bower install --allow-root && npm install",
+    "postinstall": "vendor-copy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bhoy-troy/django-hackathon-starter"
+  },
+  "author": "James Troy",
+  "license": "Proprietary",
+  "engines": {
+    "node": "6.0.1"
+  },
+  "dependencies": {
+    "font-awesome": "4.7.0",
+    "@ladjs/bootstrap-social": "7.0.2",
+    "bootstrap": "^4.0.0",
+    "d3": "^5",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.9"
+  },
+  "devDependencies": {
+    "bower": "1.8.2",
+    "electron": "1.7.10",
+    "jasmine-core": "2.9.1",
+    "karma": "1.7.1",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-electron": "5.2.2",
+    "karma-env-preprocessor": "0.1.1",
+    "karma-jasmine": "1.1.1",
+    "karma-junit-reporter": "1.2.0",
+    "vendor-copy": "2.0.0"
+  },
+  "vendorCopy": [
+    {
+      "from": "node_modules/bootstrap/dist/js/bootstrap.min.js",
+      "to": "hackathon_starter/static/js/vendor/bootstrap.min.js"
+    },
+    {
+      "from": "node_modules/d3/dist/d3.min.js",
+      "to": "hackathon_starter/static/js/vendor/d3.min.js"
+    },
+    {
+      "from": "node_modules/jquery/dist/jquery.min.js",
+      "to": "hackathon_starter/static/js/vendor/jquery.min.js"
+    },
+    {
+      "from": "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "to": "hackathon_starter/static/css/vendor/bootstrap.min.css"
+    },
+    {
+      "from": "node_modules/@ladjs/bootstrap-social/bootstrap-social.css",
+      "to": "hackathon_starter/static/css/vendor/bootstrap-social.css"
+    },
+    {
+      "from": "node_modules/font-awesome/css/font-awesome.min.css",
+      "to": "hackathon_starter/static/css/vendor/font-awesome.min.css"
+    }
+  ]
+}
