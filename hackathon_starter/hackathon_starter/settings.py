@@ -26,7 +26,8 @@ DEBUG = os.environ.get('DEBUG', False)
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['django2-hackathon-starter.herokuapp.com', '*']
+
+ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = ['127.0.0.1']
 
 # Application definition
