@@ -8,7 +8,7 @@ with Twitter data and returning the responses as JSON.
 '''
 
 
-import urlparse
+import urllib.parse as urlparse
 import oauth2 as oauth
 import requests
 import base64, random

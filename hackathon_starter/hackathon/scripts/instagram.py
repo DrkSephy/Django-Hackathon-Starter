@@ -5,7 +5,9 @@ with Instagram data and returning the responses as JSON.
 
 import requests
 import urllib
-import urllib2
+# import urllib2
+import urllib.request
+import  urllib3
 import json
 import simplejson as json2
 import googlemaps
@@ -70,8 +72,8 @@ class InstagramOauthClient(object):
             'code' : code}
 
         authSettingUrl = urllib.urlencode(authSetting)
-        req = urllib2.Request(ACCESS_TOKEN_URL, authSettingUrl)
-        content = urllib2.urlopen(req)
+        req = urllib3.Request(ACCESS_TOKEN_URL, authSettingUrl)
+        content = urllib3.urlopen(req)
         jsonlist = json.load(content)
         self.access_token = jsonlist['access_token']
         self.user_data = jsonlist['user']

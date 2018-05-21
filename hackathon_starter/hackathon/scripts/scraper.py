@@ -41,7 +41,7 @@ def extractTag(content, tag, className=None):
         filteredData: List
             - Content embed within searched tags
     '''
-    soup = BeautifulSoup(content)
+    soup = BeautifulSoup(content, "html.parser")
     data = soup.findAll(tag, {'class': className})
     filteredData = []
     for datum in data:
@@ -53,7 +53,7 @@ def steamDiscounts():
     '''Returns discounts from steam.com'''
     req = requests.get('http://store.steampowered.com/search/?specials=1#sort_by=_ASC&sort_order=ASC&specials=1&page=1')
     content = req.text
-    soup = BeautifulSoup(content)
+    soup = BeautifulSoup(content, "html.parser")
     allData = {id: {} for id in range(0, 25)}
 
     # Get all divs of a specific class

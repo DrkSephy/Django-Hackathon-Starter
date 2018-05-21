@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+
 '''This script contains methods belonging to the Steam web API
 that can collect information based on an user's gaming library.'''
+from __future__ import absolute_import, unicode_literals
+
 import requests
 import json
 
@@ -15,7 +19,7 @@ def gamespulling(steamid, apikey):
     }
     apiurl = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/'
     req = requests.get(apiurl, params=steaminfo)
-    data = json.loads(req.content)
+    data = json.loads(req.content.decode('utf-8'))
     return data['response']['games']
 
 def steamidpulling(steamun, apikey):
@@ -23,6 +27,6 @@ def steamidpulling(steamun, apikey):
     steaminfo = {'key': apikey, 'vanityurl': steamun}
     apiurl = 'http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/'
     req = requests.get(apiurl, params=steaminfo)
-    data = json.loads(req.content)
+    data = json.loads(req.content.decode('utf-8'))
     steamid = data['response']['steamid']
     return steamid
