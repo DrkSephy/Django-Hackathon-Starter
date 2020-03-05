@@ -68,7 +68,7 @@ class GooglePlus:
 
 		Parameters:
 			code: string
-				- The code is retrived from the authorization URL parameter 
+				- The code is retrieved from the authorization URL parameter 
 				to obtain access token.
 			state: string
 				- The unique session ID.

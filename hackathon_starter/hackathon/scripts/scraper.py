@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 def fetchHTML(url):
     '''
-    Returns HTML retrived from a url.
+    Returns HTML retrieved from a url.
 
     Parameters:
         url: String
